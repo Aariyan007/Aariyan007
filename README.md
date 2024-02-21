@@ -1,4 +1,4 @@
-![MasterHead](https://media0.giphy.com/channel_assets/charlos_/EwtlNE0w0jqB.gif)
+![MasterHead](https://media0.giphy.com/channel_assets/charlos_/EwtlNE0w0jqB.gif) 
 
 <h1 align="center">Hi 👋, I'm Aariyan S</h1>
 <h3 align="center">A passionate Frontend developer from India</h3>
