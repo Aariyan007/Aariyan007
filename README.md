@@ -1,6 +1,6 @@
 [![MasterHead](https://media2.giphy.com/channel_assets/charlos_/EwtlNE0w0jqB.gif)](https://rishavchanda.io)
 <h1 align="center">Hi 👋, I'm Aariyan </h1>
-<h3 align="center">A passionate Frontend developer from India</h3>
+<h3 align="center">A passionate Full Stack developer from India</h3>
 <img align="right" alt="Coding" width="400" src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/19f1535b-749b-4a8e-8640-d429f027cd3c/de04f5f-61a4ed30-0269-4b7d-bf90-85c046193478.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzE5ZjE1MzViLTc0OWItNGE4ZS04NjQwLWQ0MjlmMDI3Y2QzY1wvZGUwNGY1Zi02MWE0ZWQzMC0wMjY5LTRiN2QtYmY5MC04NWMwNDYxOTM0NzguZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.CLEU3cu8m4v-1KBoYaUXJUKTuZI7WVWuNn1xo7uGUQY">
 
 
