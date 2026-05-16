@@ -4,7 +4,7 @@
 
 <br/>
 
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=700&size=21&duration=2600&pause=600&color=FF6D00&center=true&vCenter=true&width=780&lines=I+build+intelligent+systems;Backend+Engineering+%2B+AI+Microservices;Real-time+routing+%26+simulation+engines;Voice+AI+%7C+Hardware+%7C+Distributed+Systems;Third-year+CSE+at+MITS+%7C+KTU)](https://git.io/typing-svg)
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=700&size=21&duration=2600&pause=600&color=FF6D00&center=true&vCenter=true&width=780&lines=I+build+intelligent+systems;Backend+Engineering+%2B+AI+Microservices;Real-time+routing+%26+simulation+engines;Voice+AI+%7C+Hardware+%7C+Distributed+Systems;Fourth-year+CSE+at+MITS+%7C+KTU)](https://git.io/typing-svg)
 
 <br/>
 
@@ -34,7 +34,7 @@
 
 &nbsp;&nbsp;`>` &nbsp;**NAME** &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ &nbsp;Aariyan Sunu  
 &nbsp;&nbsp;`>` &nbsp;**LOCATION** &nbsp;&nbsp;&nbsp;&nbsp;→ &nbsp;Kerala, India  
-&nbsp;&nbsp;`>` &nbsp;**DEGREE** &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ &nbsp;BTech CSE · 6th Sem · MITS · KTU  
+&nbsp;&nbsp;`>` &nbsp;**DEGREE** &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ &nbsp;BTech CSE · 7th Sem · MITS · KTU  
 &nbsp;&nbsp;`>` &nbsp;**ROLE** &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ &nbsp;Backend Eng + AI Systems Builder  
 &nbsp;&nbsp;`>` &nbsp;**MINDSET** &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ &nbsp;*"I think in systems, not websites"*  
 &nbsp;&nbsp;`>` &nbsp;**FUN FACT** &nbsp;&nbsp;&nbsp;&nbsp;→ &nbsp;Debugs 40% faster with lo-fi
