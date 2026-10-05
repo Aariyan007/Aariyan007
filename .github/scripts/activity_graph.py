@@ -1,7 +1,8 @@
 """Render a self-hosted contribution activity graph as an SVG.
 
-Fetches the last 31 days of contributions through the GitHub GraphQL API and
-draws a glowing area chart in the profile's orange-on-black theme. Running it
+Fetches the last year of contributions through the GitHub GraphQL API and
+draws a glowing 31-day area chart plus a full-year heatmap in the profile's
+orange-on-black theme. Running it
 inside GitHub Actions removes the dependency on third-party image hosts that
 rate-limit or go offline.
 """
@@ -13,7 +14,7 @@ import urllib.request
 
 USER = os.environ.get("GH_USER", "Aariyan007")
 TOKEN = os.environ.get("GH_TOKEN", "")
-OUT = sys.argv[1] if len(sys.argv) > 1 else "dist/activity-graph.svg"
+OUT_DIR = sys.argv[1] if len(sys.argv) > 1 else "dist"
 
 QUERY = """
 query($login: String!, $from: DateTime!, $to: DateTime!) {
@@ -29,13 +30,13 @@ query($login: String!, $from: DateTime!, $to: DateTime!) {
 """
 
 
-def fetch_days():
+def fetch_weeks():
     now = dt.datetime.now(dt.timezone.utc)
     body = json.dumps({
         "query": QUERY,
         "variables": {
             "login": USER,
-            "from": (now - dt.timedelta(days=30)).strftime("%Y-%m-%dT00:00:00Z"),
+            "from": (now - dt.timedelta(days=364)).strftime("%Y-%m-%dT00:00:00Z"),
             "to": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
         },
     }).encode()
@@ -49,11 +50,10 @@ def fetch_days():
     if "errors" in data:
         raise SystemExit(f"GraphQL error: {data['errors']}")
     weeks = data["data"]["user"]["contributionsCollection"]["contributionCalendar"]["weeks"]
-    days = [d for w in weeks for d in w["contributionDays"]]
-    return days[-31:]
+    return weeks
 
 
-def render(days):
+def render_chart(days):
     w, h = 900, 300
     pl, pr, pt, pb = 52, 28, 62, 44
     cw, ch = w - pl - pr, h - pt - pb
@@ -101,8 +101,62 @@ def render(days):
 """
 
 
+def render_heatmap(weeks):
+    cell, gap, pl, pt = 13, 3, 36, 64
+    step = cell + gap
+    w = pl + len(weeks) * step + 24
+    h = pt + 7 * step + 44
+    days = [d for wk in weeks for d in wk["contributionDays"]]
+    total = sum(d["contributionCount"] for d in days)
+    peak = max([d["contributionCount"] for d in days] + [1])
+    best = max(days, key=lambda d: d["contributionCount"])
+    palette = ["#1a0f08", "#662200", "#b34700", "#ff6d00", "#ffb347"]
+
+    def level(c):
+        if c == 0:
+            return 0
+        return min(4, 1 + int(3 * (c - 1) / max(peak - 1, 1) + 0.5))
+
+    cells, months, last_month = [], [], None
+    for x, wk in enumerate(weeks):
+        for d in wk["contributionDays"]:
+            date = dt.date.fromisoformat(d["date"])
+            y = pt + ((date.weekday() + 1) % 7) * step
+            cells.append(
+                f'<rect x="{pl + x * step}" y="{y}" width="{cell}" height="{cell}" rx="3" '
+                f'fill="{palette[level(d["contributionCount"])]}"><title>{d["date"]}: {d["contributionCount"]}</title></rect>'
+            )
+        first = dt.date.fromisoformat(wk["contributionDays"][0]["date"])
+        if first.month != last_month and first.day <= 14 or x == 0:
+            months.append(f'<text x="{pl + x * step}" y="{pt - 10}" fill="#8a6a45" font-size="11">{first.strftime("%b")}</text>')
+        last_month = first.month
+    rows = "".join(
+        f'<text x="{pl - 10}" y="{pt + i * step + 10}" text-anchor="end" fill="#8a6a45" font-size="10">{n}</text>'
+        for i, n in ((1, "Mon"), (3, "Wed"), (5, "Fri"))
+    )
+    legend = "".join(
+        f'<rect x="{w - 24 - (5 - i) * step - 36}" y="{h - 28}" width="{cell}" height="{cell}" rx="3" fill="{c}"/>'
+        for i, c in enumerate(palette)
+    )
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}" font-family="'JetBrains Mono',Menlo,Consolas,monospace">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0a0a0a"/><stop offset="1" stop-color="#1a0a00"/></linearGradient></defs>
+<rect width="{w}" height="{h}" rx="14" fill="url(#bg)" stroke="#3a1c00"/>
+<text x="{pl}" y="34" fill="#ff6d00" font-size="16" font-weight="700">&gt; {USER} / contribution_heatmap</text>
+<text x="{w - 24}" y="34" text-anchor="end" fill="#ffb347" font-size="12">{total} contributions in the last year · best day {best["contributionCount"]}</text>
+{"".join(months)}{rows}{"".join(cells)}
+<text x="{w - 24 - 5 * step - 44}" y="{h - 17}" text-anchor="end" fill="#8a6a45" font-size="10">Less</text>
+{legend}
+<text x="{w - 24}" y="{h - 17}" text-anchor="end" fill="#8a6a45" font-size="10">More</text>
+</svg>
+"""
+
+
 if __name__ == "__main__":
-    os.makedirs(os.path.dirname(OUT) or ".", exist_ok=True)
-    with open(OUT, "w", encoding="utf-8") as f:
-        f.write(render(fetch_days()))
-    print(f"wrote {OUT}")
+    os.makedirs(OUT_DIR, exist_ok=True)
+    weeks = fetch_weeks()
+    days = [d for wk in weeks for d in wk["contributionDays"]][-31:]
+    for name, svg in (("activity-graph.svg", render_chart(days)), ("contribution-heatmap.svg", render_heatmap(weeks))):
+        path = os.path.join(OUT_DIR, name)
+        with open(path, "w", encoding="utf-8") as f:
+            f.write(svg)
+        print(f"wrote {path}")
