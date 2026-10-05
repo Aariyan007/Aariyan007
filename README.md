@@ -418,18 +418,10 @@ End-to-end observability stack — a drop-in npm logger, a central ingestion ser
 [![Gmail](https://img.shields.io/badge/Gmail-0a0a0a?style=for-the-badge&logo=gmail&logoColor=ff6d00)](mailto:aariyansunu28@gmail.com)
 [![GitHub](https://img.shields.io/badge/GitHub-0a0a0a?style=for-the-badge&logo=github&logoColor=ff6d00)](https://github.com/aariyan007)
 
-<br/><br/>
+<br/>
 
-```
-+--------------------------------------------------------------------+
-|                                                                    |
-|   "I think in systems, not just websites.                          |
-|    I build things that solve real problems -- from voice AI        |
-|    assistants to emergency routing engines."                       |
-|                                                                    |
-+--------------------------------------------------------------------+
-```
+<img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=16&duration=4000&pause=1500&color=FFB347&center=true&vCenter=true&width=720&height=60&lines=%22I+think+in+systems%2C+not+just+websites.%22;%22From+voice+AI+assistants+to+emergency+routing+engines.%22;Let%27s+build+something+that+matters." alt="quote"/>
 
 </div>
 
-![footer](https://capsule-render.vercel.app/api?type=venom&color=0:ff4500,60:1a0a00,100:0a0a0a&height=140&section=footer&reversal=true)
+<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:0a0a0a,50:1a0a00,100:ff4500&height=160&section=footer&text=Thanks%20for%20stopping%20by&fontSize=26&fontColor=ffb347&fontAlignY=72"/>
