@@ -16,6 +16,19 @@
 
 </div>
 
+<div align="center">
+
+```console
+aariyan@mits:~$ ./boot --profile
+[ OK ] loading backend core ............ spring · node · fastapi
+[ OK ] attaching ai modules ............ whisper · gemini · mobilenet
+[ OK ] pairing hardware ................ esp32 over wifi
+[ OK ] caffeine level .................. critical
+>>> system online. shipping.
+```
+
+</div>
+
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:ff4500,100:0a0a0a&height=80&section=header&reversal=true"/>
 
 ---
@@ -104,9 +117,16 @@ DevOps / Infra    ███████░░░░░░░░░░░░░�
 <td width="58%" valign="top">
 
 **Pipeline:**
-```
-Wake Word → Voice Auth → Whisper STT → Cache
-         → Gemini Router → ReAct Agent → ElevenLabs TTS
+```mermaid
+flowchart LR
+    A([Wake Word]) --> B[Voice Auth]
+    B --> C[Whisper STT]
+    C --> D{Cache hit?}
+    D -- yes --> G
+    D -- no --> E[Gemini Router]
+    E --> F[ReAct Agent]
+    F --> G[ElevenLabs TTS]
+    G --> H([Iron Man HUD])
 ```
 - Porcupine wake word + ECAPA-TDNN speaker verification
 - Gemini 1.5 Flash intent router — sub-100ms on 50 cached commands
@@ -340,7 +360,9 @@ End-to-end observability stack — a drop-in npm logger, a central ingestion ser
 
 <br/>
 
-[![Activity Graph](https://github-readme-activity-graph.vercel.app/graph?username=aariyan007&theme=github-compact&hide_border=true&bg_color=0a0a0a&color=ff6d00&line=ff4500&point=ffb347&area=true)](https://github.com/ashutosh00710/github-readme-activity-graph)
+<picture>
+  <img alt="contribution activity graph" width="100%" src="https://raw.githubusercontent.com/Aariyan007/Aariyan007/output/activity-graph.svg"/>
+</picture>
 
 <br/>
 

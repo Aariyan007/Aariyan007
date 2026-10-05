@@ -1,0 +1,49 @@
+name: Generate profile assets
+
+on:
+  schedule:
+    - cron: "0 */12 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/scripts/**"
+      - ".github/workflows/profile-assets.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: profile-assets
+  cancel-in-progress: true
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Contribution activity graph
+        env:
+          GH_USER: ${{ github.repository_owner }}
+          # Add a PROFILE_TOKEN secret (classic PAT, read:user) to include private contributions.
+          GH_TOKEN: ${{ secrets.PROFILE_TOKEN || github.token }}
+        run: python .github/scripts/activity_graph.py dist/activity-graph.svg
+
+      - name: Contribution snake
+        uses: Platane/snk/svg-only@v3
+        with:
+          github_user_name: ${{ github.repository_owner }}
+          outputs: |
+            dist/github-contribution-grid-snake.svg?color_snake=%23ff4500&color_dots=%231a0f08,%23662200,%23b34700,%23ff6d00,%23ffb347
+            dist/github-contribution-grid-snake-dark.svg?palette=github-dark&color_snake=%23ff4500&color_dots=%231a0f08,%23662200,%23b34700,%23ff6d00,%23ffb347
+
+      - name: Publish to output branch
+        uses: crazy-max/ghaction-github-pages@v4
+        with:
+          target_branch: output
+          build_dir: dist
+          keep_history: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
